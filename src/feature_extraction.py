@@ -37,3 +37,17 @@ def extract_hog_features(image,vis_flag=False):
         plt.show()
     
     return hog_features
+
+def intensity_projection(image):
+    '''
+    input: 1D array of 784 pixel values (28x28)
+    output: 1D array of 56 values (28 row sums + 28 column sums)
+    the logic is that there are distinct patterns in the way we write digits
+    so for example the digit 1 will have a high value in the middle but low at the sides
+    '''
+    image_2d = image.reshape(28, 28)
+    
+    row_projection = image_2d.sum(axis=1)  # 28 values
+    col_projection = image_2d.sum(axis=0)  # 28 values
+    
+    return np.concatenate([row_projection, col_projection])
