@@ -46,8 +46,9 @@ def intensity_projection(image):
     so for example the digit 1 will have a high value in the middle but low at the sides
     '''
     image_2d = image.reshape(28, 28)
-    
+    image_2d[image_2d!=0]=1
     row_projection = image_2d.sum(axis=1)  # 28 values
     col_projection = image_2d.sum(axis=0)  # 28 values
     
     return np.concatenate([row_projection, col_projection])
+
